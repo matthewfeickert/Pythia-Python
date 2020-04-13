@@ -6,10 +6,11 @@ image:
 	docker build . \
 	-f Dockerfile \
 	--build-arg BASE_IMAGE=python:3.7-slim \
+	--build-arg HEPMC_VERSION=3.2.1 \
 	--build-arg FASTJET_VERSION=3.3.3 \
 	--build-arg PYTHIA_VERSION=8301 \
 	--tag matthewfeickert/pythia-python:pythia8.301 \
-	--tag matthewfeickert/pythia-python:pythia8.301-fastjet3.3.3-python3.7 \
+	--tag matthewfeickert/pythia-python:pythia8.301-hepmc3.2.1-fastjet3.3.3-python3.7 \
 	--tag matthewfeickert/pythia-python:latest
 
 run:
