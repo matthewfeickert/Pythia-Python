@@ -39,6 +39,7 @@ RUN mkdir /code && \
       -DCMAKE_BUILD_TYPE=Release \
       -Dbuild_docs:BOOL=OFF \
       -Dmomentum:STRING=MEV \
+      -Dlength:STRING=MM \
       -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
