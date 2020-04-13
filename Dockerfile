@@ -29,17 +29,15 @@ ARG HEPMC_VERSION=2.06.10
 RUN mkdir /code && \
     cd /code && \
     wget http://hepmc.web.cern.ch/hepmc/releases/hepmc${HEPMC_VERSION}.tgz && \
-    tar xvfz hepmc${HEPMC_VERSION}.tar.gz && \
+    tar xvfz hepmc${HEPMC_VERSION}.tgz && \
     mv HepMC-${HEPMC_VERSION} src && \
     export PYTHON_MINOR_VERSION=${PYTHON_VERSION::-2} && \
     mkdir build && \
     cd build && \
     cmake \
-      -DHEPMC_ENABLE_ROOTIO=OFF \
-      -DHEPMC_ENABLE_TEST=ON \
-      -DHEPMC_BUILD_EXAMPLES=OFF \
-      -DHEPMC_PYTHON_VERSIONS=3.X \
-      -DPYTHON_EXECUTABLE=$(which python3) \
+      -DCMAKE_CXX_COMPILER=$(which g++) \
+      -DCMAKE_BUILD_TYPE=Release \
+      -Dbuild_docs:BOOL=OFF \
       -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
