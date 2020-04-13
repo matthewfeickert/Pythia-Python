@@ -2,10 +2,10 @@ name: Publish Docker Images
 
 on:
   push:
-    branches:
-    - master
-    tags:
-    - v*
+    # branches:
+    # - master
+    # tags:
+    # - v*
 
 jobs:
   build-and-publish:
@@ -22,7 +22,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: matthewfeickert/pythia-python
         dockerfile: Dockerfile
-        tags: latest,pythia8.301,pythia8.301-hepmc3.2.1-fastjet3.3.3-python3.7
+        tags: debug-latest
     - name: Build and Publish to Registry with Release Tag
       if: startsWith(github.ref, 'refs/tags/')
       uses: docker/build-push-action@v1
