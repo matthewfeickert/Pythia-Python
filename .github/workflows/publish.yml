@@ -22,7 +22,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: matthewfeickert/pythia-python
         dockerfile: Dockerfile
-        tags: latest,pythia8.301,pythia8.301-fastjet3.3.3-python3.7
+        tags: latest,pythia8.301,pythia8.301-hepmc3.2.1-fastjet3.3.3-python3.7
     - name: Build and Publish to Registry with Release Tag
       if: startsWith(github.ref, 'refs/tags/')
       uses: docker/build-push-action@v1
@@ -31,5 +31,5 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: matthewfeickert/pythia-python
         dockerfile: Dockerfile
-        tags: latest,latest-stable,pythia8.301,pythia8.301-fastjet3.3.3-python3.7
+        tags: latest,latest-stable,pythia8.301,pythia8.301-hepmc3.2.1-fastjet3.3.3-python3.7
         tag_with_ref: true
