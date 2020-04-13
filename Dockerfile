@@ -34,8 +34,9 @@ RUN mkdir /code && \
     mkdir build && \
     cd build && \
     cmake \
-      -DCMAKE_INSTALL_PREFIX=/copy/local \
+      -DHEPMC3_ENABLE_ROOTIO=OFF \
       -DHEPMC3_BUILD_EXAMPLES=OFF \
+      -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
     cmake --build . --target install && \
