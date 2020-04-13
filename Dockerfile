@@ -36,6 +36,7 @@ RUN mkdir /code && \
     cd build && \
     cmake \
       -DHEPMC3_ENABLE_ROOTIO=OFF \
+      -DHEPMC3_ENABLE_TEST=ON \
       -DHEPMC3_BUILD_EXAMPLES=OFF \
       -DHEPMC3_PYTHON_VERSIONS=3.X \
       -DPYTHON_EXECUTABLE=$(which python3) \
@@ -43,6 +44,7 @@ RUN mkdir /code && \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
     cmake --build . --target install && \
+    ctest --verbose --output-on-failure && \
     rm -rf /code
 
 # Install FastJet
