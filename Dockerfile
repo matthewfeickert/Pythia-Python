@@ -25,20 +25,20 @@ RUN apt-get -qq -y update && \
 RUN mkdir -p /copy/local
 
 # Install HepMC
-ARG HEPMC_VERSION=3.2.1
+ARG HEPMC_VERSION=2.06.10
 RUN mkdir /code && \
     cd /code && \
-    wget http://hepmc.web.cern.ch/hepmc/releases/HepMC3-${HEPMC_VERSION}.tar.gz && \
-    tar xvfz HepMC3-${HEPMC_VERSION}.tar.gz && \
-    mv HepMC3-${HEPMC_VERSION} src && \
+    wget http://hepmc.web.cern.ch/hepmc/releases/hepmc${HEPMC_VERSION}.tgz && \
+    tar xvfz hepmc${HEPMC_VERSION}.tar.gz && \
+    mv HepMC-${HEPMC_VERSION} src && \
     export PYTHON_MINOR_VERSION=${PYTHON_VERSION::-2} && \
     mkdir build && \
     cd build && \
     cmake \
-      -DHEPMC3_ENABLE_ROOTIO=OFF \
-      -DHEPMC3_ENABLE_TEST=ON \
-      -DHEPMC3_BUILD_EXAMPLES=OFF \
-      -DHEPMC3_PYTHON_VERSIONS=3.X \
+      -DHEPMC_ENABLE_ROOTIO=OFF \
+      -DHEPMC_ENABLE_TEST=ON \
+      -DHEPMC_BUILD_EXAMPLES=OFF \
+      -DHEPMC_PYTHON_VERSIONS=3.X \
       -DPYTHON_EXECUTABLE=$(which python3) \
       -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
@@ -82,7 +82,9 @@ RUN mkdir /code && \
       --with-gzip \
       --with-python-bin=/usr/local/bin \
       --with-python-lib=/usr/lib/python${PYTHON_MINOR_VERSION} \
-      --with-python-include=/usr/include/python${PYTHON_MINOR_VERSION} && \
+      --with-python-include=/usr/include/python${PYTHON_MINOR_VERSION} \
+      --with-hepmc=/copy/local \
+      --with-hepmcversion=${HEPMC_VERSION} && \
     make -j$(($(nproc) - 1)) && \
     make install && \
     rm -rf /code
