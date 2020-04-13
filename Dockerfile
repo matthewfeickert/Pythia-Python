@@ -36,6 +36,7 @@ RUN mkdir /code && \
     cmake \
       -DHEPMC3_ENABLE_ROOTIO=OFF \
       -DHEPMC3_BUILD_EXAMPLES=OFF \
+      -DPYTHON_EXECUTABLE=$(which python3) \
       -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
