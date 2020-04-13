@@ -31,12 +31,14 @@ RUN mkdir /code && \
     wget http://hepmc.web.cern.ch/hepmc/releases/HepMC3-${HEPMC_VERSION}.tar.gz && \
     tar xvfz HepMC3-${HEPMC_VERSION}.tar.gz && \
     mv HepMC3-${HEPMC_VERSION} src && \
+    export PYTHON_MINOR_VERSION=${PYTHON_VERSION::-2} && \
     mkdir build && \
     cd build && \
     cmake \
       -DHEPMC3_ENABLE_ROOTIO=OFF \
       -DHEPMC3_BUILD_EXAMPLES=OFF \
       -DPYTHON_EXECUTABLE=$(which python3) \
+      -DPYTHON_INCLUDE_DIR=/usr/include/python${PYTHON_MINOR_VERSION} \
       -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
