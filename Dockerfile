@@ -39,7 +39,6 @@ RUN mkdir /code && \
       -DHEPMC3_BUILD_EXAMPLES=OFF \
       -DHEPMC3_PYTHON_VERSIONS=3.X \
       -DPYTHON_EXECUTABLE=$(which python3) \
-      -DPYTHON_INCLUDE_DIR=/usr/include/python${PYTHON_MINOR_VERSION} \
       -DCMAKE_INSTALL_PREFIX=/copy/local \
       ../src && \
     cmake --build . -- -j$(($(nproc) - 1)) && \
